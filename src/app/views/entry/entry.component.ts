@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {EntryService} from './entry.service';
 
 @Component({
@@ -8,11 +8,11 @@ import {EntryService} from './entry.service';
   styleUrls: ['./entry.component.scss'],
 })
 export class EntryComponent implements OnInit {
-  public form = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+  protected form = new UntypedFormGroup({
+    username: new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
   });
 
-  constructor(private fb: FormBuilder, private entryService: EntryService) {}
+  constructor(private fb: UntypedFormBuilder, private entryService: EntryService) {}
 
   public ngOnInit(): void {
     this.initializeForm();

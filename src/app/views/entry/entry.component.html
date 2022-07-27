@@ -1,0 +1,8 @@
+<main>
+    <form [formGroup]="form">
+        <label for="username">Username</label>
+        <input type="text" placeholder="John C. Martin" aria-autocomplete="username" name="username" id="username"
+            aria-required="true" formControlname="username">
+        <button type="submit" (click)="handleLoginRequest()">Login!</button>
+    </form>
+</main>

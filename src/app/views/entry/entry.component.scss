@@ -13,11 +13,7 @@
             max-width: 380px;
             margin: 2rem;
             padding: 2rem;
-            border-radius: 3.5px;
-            margin: 1.4rem 0.5rem;
-            border: 1px solid $color-black;
-            outline: 2px solid $color-black;
-            outline-offset: 3px;
+            @include pokemon-border;
 
             form {
                 @include flex-column;

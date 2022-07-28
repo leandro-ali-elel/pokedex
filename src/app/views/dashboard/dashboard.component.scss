@@ -1,10 +1,20 @@
+@import "/src/assets/sass/main.scss";
+
 .grid {
     display: grid;
-    grid-template-rows: 110px auto;
-    grid-template-columns: min-content minmax(800px, 100%);
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
     grid-template-areas:
-        "header header"
-        "aside main";
+        "header"
+        "aside"
+        "main";
+
+    // @include tablet() {
+    //     grid-template-areas:
+    //         "header header"
+    //         "aside main";
+    //     grid-template-columns: 2fr 8fr;
+    // }
 
     header {
         grid-area: header;

@@ -1,13 +1,19 @@
-<ng-container *ngIf="(team$ | async) as team">
-    <section class="my-pokemons">
+<main>
 
-        <ng-container *ngFor="let pokemon of team">
-            <div class="pokemon-card">
-                {{pokemon}}
-            </div>
-        </ng-container>
+
+    <ng-container *ngIf="(team$ | async) as team">
+        <section class="my-pokemons">
+
+            <ng-container *ngFor="let pokemon of team">
+                <div class="pokemon-card-wrapper">
+                    <div class="pokemon-card">
+                        {{pokemon}}
+                    </div>
+                </div>
+            </ng-container>
+        </section>
+    </ng-container>
+    <section class="pokemon-box">
+
     </section>
-</ng-container>
-<section class="pokemon-box">
-
-</section>
+</main>

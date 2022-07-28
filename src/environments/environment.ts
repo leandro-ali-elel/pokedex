@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   trainersAPIURL: 'assets/data.json',
+  pokeAPIURL: 'https://beta.pokeapi.co/graphql/v1beta',
 };
 
 /*

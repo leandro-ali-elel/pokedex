@@ -24,7 +24,7 @@ export class EntryComponent {
 
     this.entryService.login(this.form.value.username!).subscribe({
       error: (err: HttpErrorResponse) => {
-        alert(err.message);
+        alert(err.statusText);
       },
       complete: () => {
         this.router.navigate(['dashboard']);

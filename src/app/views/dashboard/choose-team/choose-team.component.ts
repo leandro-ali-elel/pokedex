@@ -8,7 +8,7 @@ import {PokemonService} from 'src/app/core/services/pokemon.service';
   styleUrls: ['./choose-team.component.scss'],
 })
 export class ChooseTeamComponent implements OnInit {
-  protected team$!: Observable<number[]>;
+  protected team$!: Observable<any>;
 
   constructor(private pokemonService: PokemonService) {}
 

@@ -1,6 +1,9 @@
 <ng-container *ngIf="(pokemons$ |async) as pokemons">
-    <cdk-virtual-scroll-viewport itemSize="20" class="example-viewport">
-        <div *cdkVirtualFor="let pokemon of pokemons.pokemon_v2_pokemon" class="example-item">{{pokemon.name}}</div>
+    <cdk-virtual-scroll-viewport [itemSize]="pokemons.pokemon_v2_pokemon.length" class="example-viewport">
+        <div *cdkVirtualFor="let pokemon of pokemons.pokemon_v2_pokemon" class="example-item">
+            {{pokemon.name}}
+            {{pokemon.id}}
+        </div>
     </cdk-virtual-scroll-viewport>
 </ng-container>
 

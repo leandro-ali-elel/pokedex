@@ -11,8 +11,13 @@ export class PokedexFacade {
   public getAllPokemons(
     resultsPerPage: number,
     sortBy: PokedexSortBy,
-    sortByOrder: PokedexSortByOrder
+    sortByOrder: PokedexSortByOrder,
+    offset: number
   ): Observable<Pokemons> {
-    return this.pokemonService.getAllPokemons(resultsPerPage, sortBy, sortByOrder);
+    return this.pokemonService.getAllPokemons(
+      resultsPerPage,
+      {[sortBy]: sortByOrder},
+      offset
+    );
   }
 }

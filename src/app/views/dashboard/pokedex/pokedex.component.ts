@@ -17,7 +17,8 @@ export class PokedexComponent implements OnInit {
   protected resultsPerPage$ = new BehaviorSubject<number>(15);
   protected sortBy$ = new BehaviorSubject<PokedexSortBy>('id');
   protected sortByOrder$ = new BehaviorSubject<PokedexSortByOrder>('asc');
-
+  protected offset$ = new BehaviorSubject<number>(0);
+  
   constructor(private pokedexFacade: PokedexFacade) {}
 
   public ngOnInit(): void {
@@ -33,9 +34,10 @@ export class PokedexComponent implements OnInit {
       this.resultsPerPage$,
       this.sortBy$,
       this.sortByOrder$,
+      this.offset$,
     ]).pipe(
-      switchMap(([resultsPerPage, sortBy, sortByOrder]) =>
-        this.pokedexFacade.getAllPokemons(resultsPerPage, sortBy, sortByOrder)
+      switchMap(([resultsPerPage, sortBy, sortByOrder, offset]) =>
+        this.pokedexFacade.getAllPokemons(resultsPerPage, sortBy, sortByOrder, offset)
       )
     );
   }

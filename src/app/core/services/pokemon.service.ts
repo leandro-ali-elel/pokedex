@@ -40,8 +40,12 @@ export const POKEMONS = gql`
 `;
 
 export const POKEDEX = gql`
-  query Pokedex($sortBy: String!, $sortByOrder: String!, $resultsPerPage: Int!) {
-    pokemon_v2_pokemon(order_by: {$sortBy: $sortByOrder}, limit: $resultsPerPage) {
+  query Pokedex(
+    $order_by: [pokemon_v2_pokemon_order_by!]
+    $resultsPerPage: Int!
+    $offset: Int!
+  ) {
+    pokemon_v2_pokemon(order_by: $order_by, limit: $resultsPerPage, offset: $offset) {
       id
       name
       pokemon_v2_pokemonstats(where: {stat_id: {_in: [1, 2, 3, 6]}}) {
@@ -77,13 +81,16 @@ export class PokemonService {
     );
   }
 
-  public getAllPokemons(
-    resultsPerPage: number,
-    sortBy: PokedexSortBy,
-    sortByOrder: PokedexSortByOrder
-  ): Observable<Pokemons> {
+  public getAllPokemons(resultsPerPage: number, order_by: Object, offset:number): Observable<Pokemons> {
     return this.apollo
-      .watchQuery({query: POKEDEX, variables: {sortBy, sortByOrder, resultsPerPage}})
+      .watchQuery({
+        query: POKEDEX,
+        variables: {
+          order_by,
+          resultsPerPage,
+          offset
+        },
+      })
       .valueChanges.pipe(
         first(res => !res.loading),
         pluck('data')

@@ -1,0 +1,75 @@
+html {
+    font-size: 62.5%; // 1rem = 10px
+    background-color: white;
+}
+
+html,
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+a,
+button,
+input {
+    all: unset;
+}
+
+a,
+button {
+    cursor: pointer;
+}
+
+button {
+    padding: 1.5rem 2rem;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+* {
+    @include main-transition;
+    color: $color-black;
+    font-family: "pokemon";
+}
+
+h1,
+header {
+    font-weight: 300;
+}
+
+h1 {
+    margin: 1rem 0 #{"clamp(0.5rem, 0.2rem + 3vw, 2.8rem)"} 0;
+    font-size: #{"clamp(2.5rem, 2rem + 3vw, 6rem)"};
+}
+
+h2 {
+    margin: 1rem 0 #{"clamp(0.5rem, 0.2rem + 3vw, 2.8rem)"} 0;
+    font-size: #{"clamp(2.25rem, 1.8rem + 3vw, 5.5rem)"};
+    font-weight: 300;
+}
+
+p {
+    font-size: #{"clamp(1.5rem, 0.6rem + 1vw, 1.8rem)"};
+    color: $font-color-gray;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    max-inline-size: 80ch;
+}
+
+img {
+    inline-size: 100%;
+    max-inline-size: 100%;
+    block-size: auto;
+    display: block;
+}
+
+section {
+    text-align: center;
+}

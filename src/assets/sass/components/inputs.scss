@@ -1,0 +1,17 @@
+input {
+    max-inline-size: 100%;
+    border-bottom: 3px dashed $color-black;
+    padding-inline: 0.5rem;
+    padding-block-start: 1.8rem;
+    padding-block-end: 0.5rem;
+    color: $color-black;
+    font-size: #{"clamp(1.4rem, 1rem + 1vw, 1.8rem)"};
+
+    &::placeholder {
+        color:$color-shallow-text;
+    }
+}
+
+label {
+    font-size: #{"clamp(1.6rem, 1rem + 1vw, 1.8rem)"};
+}

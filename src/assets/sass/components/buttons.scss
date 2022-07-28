@@ -1,0 +1,33 @@
+button.btn {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: #{"clamp(1.6rem, 0.6rem + 1vw, 1.8rem)"};
+    color: $color-black;
+    border: 2px solid black;
+    border-radius: 4px;
+    outline: 1px solid black;
+    outline-offset: 1px;
+    @include flex-center;
+
+    &.btn-primary {
+        background-color: white;
+
+        .cursor {
+            opacity: 0;
+        }
+
+        &::before {
+            content: "▲";
+            transform: rotate(90deg);
+            animation: delayed-blink 2.5s infinite linear;
+            padding-top: 1.5rem;
+
+        }
+    }
+
+    &:disabled {
+        pointer-events: none;
+        color: $color-shallow-text;
+        background-color: $color-disabled;
+    }
+}

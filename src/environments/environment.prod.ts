@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  trainersAPIURL: '/app/core/constants/mock-pokemons.json',
+
 };

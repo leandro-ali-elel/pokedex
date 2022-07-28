@@ -1,0 +1,21 @@
+@keyframes blink {
+    from,
+    to {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+@keyframes delayed-blink {
+    from,
+    to {
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    85%{
+        opacity: 1;
+    }
+}

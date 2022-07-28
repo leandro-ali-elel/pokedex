@@ -1,10 +1,8 @@
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
-import {Trainer} from 'src/app/core/models/trainer';
+import {tap} from 'rxjs/operators';
+import {Trainer} from 'src/app/core/models/interfaces/trainer';
 import {PokemonService} from 'src/app/core/services/pokemon.service';
-import {environment} from 'src/environments/environment';
 @Injectable()
 export class EntryService {
   constructor(private pokemonService: PokemonService) {}

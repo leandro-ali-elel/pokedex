@@ -1,0 +1,16 @@
+<main>
+    <section class="pokemon-box">
+        <h1>My Pokemon Box</h1>
+        <h2>Ready to pick your favorite pokemon?</h2>
+        <ng-container *ngIf="(box$ | async) as box; else loadingPokemons">
+            <section class="my-box">
+                <poke-poke-card *ngFor="let pokemon of box.pokemon_v2_pokemon" [pokemon]="pokemon">
+                </poke-poke-card>
+            </section>
+        </ng-container>
+    </section>
+</main>
+
+<ng-template #loadingPokemons>
+    Loading Pokemons...
+</ng-template>

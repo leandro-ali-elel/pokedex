@@ -1,0 +1,14 @@
+<main>
+    <h1>My team</h1>
+    <h2>Hey {{username}} this is your team!</h2>
+    <ng-container *ngIf="(team$ | async) as team; else loadingPokemons">
+        <section class="my-pokemons">
+            <poke-poke-card *ngFor="let pokemon of team.pokemon_v2_pokemon" [pokemon]="pokemon">
+            </poke-poke-card>
+        </section>
+    </ng-container>
+</main>
+
+<ng-template #loadingPokemons>
+    Loading Pokemons...
+</ng-template>

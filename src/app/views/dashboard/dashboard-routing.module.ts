@@ -8,8 +8,16 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
-        path: 'choose-team',
-        loadChildren: () => import('./choose-team/choose-team.module').then(m => m.ChooseTeamModule),
+        path: 'my-team',
+        loadChildren: () => import('./my-team/my-team.module').then(m => m.MyTeamModule),
+      },
+      {
+        path: 'my-box',
+        loadChildren: () => import('./my-box/my-box.module').then(m => m.MyBoxModule),
+      },
+      {
+        path: 'pokedex',
+        loadChildren: () => import('./pokedex/pokedex.module').then(m => m.PokedexModule),
       },
       {
         path: 'fight',

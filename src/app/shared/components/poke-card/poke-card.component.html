@@ -1,0 +1,21 @@
+<div class="pokemon-card-wrapper">
+    <div class="pokemon-card">
+        <h3>{{pokemon.name}}</h3>
+        <picture>
+            <!-- 
+            avif, webp 
+            <source>
+            --->
+            <picture>
+                <source [srcset]="pokemonImg?.front_default">
+                <img class="pokemon-picture" width="238" height="238" src="" alt="">
+            </picture>
+        </picture>
+        <p> No. {{pokemon.id}}</p>
+        <div class="stats">
+            <ng-container *ngFor="let stat of pokemon.pokemon_v2_pokemonstats">
+                <div class="stat"><b>{{stat.pokemon_v2_stat.name}}</b>: {{stat.base_stat}}</div>
+            </ng-container>
+        </div>
+    </div>
+</div>

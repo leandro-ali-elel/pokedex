@@ -1,24 +1,16 @@
 @import "/src/assets/sass/main.scss";
 main {
     padding: 0 20px;
+    text-align: center;
 
     .my-pokemons {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 10px;
+        @include container-limit();
 
         @include tablet() {
             grid-template-columns: repeat(3, 1fr);
-        }
-
-        .pokemon-card-wrapper {
-            @include flex-center;
-
-            .pokemon-card {
-                @include pokemon-border;
-                width: 100%;
-                max-width: 260px;
-            }
         }
     }
 }

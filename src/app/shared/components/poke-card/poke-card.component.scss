@@ -1,0 +1,41 @@
+@import "/src/assets/sass/main.scss";
+
+.pokemon-card-wrapper {
+    @include flex-center;
+
+    .pokemon-card {
+        @include pokemon-border;
+        @include flex-column;
+        padding: 20px;
+        width: 100%;
+        max-width: 280px;
+        text-transform: capitalize;
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-auto-rows: 1fr;
+
+            .stat {
+                text-align: start;
+                padding: 5px;
+            }
+        }
+
+        .pokemon-picture {
+            height: 128px;
+            width: 128px;
+            margin: auto;
+        }
+    }
+}
+
+@include tablet() {
+    .pokemon-card-wrapper {
+        .pokemon-card {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+}

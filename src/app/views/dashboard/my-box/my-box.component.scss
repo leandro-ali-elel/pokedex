@@ -1,0 +1,16 @@
+@import "/src/assets/sass/main.scss";
+main {
+    padding: 0 20px;
+    text-align: center;
+
+    .my-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+        @include container-limit();
+
+        @include tablet() {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}

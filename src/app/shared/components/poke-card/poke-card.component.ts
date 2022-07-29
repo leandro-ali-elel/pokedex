@@ -17,7 +17,6 @@ import {extractImageFromSprite} from 'src/app/utils/pokemon-utils';
 })
 export class PokeCardComponent implements OnChanges {
   @Input() public pokemon!: Pokemon;
-  @Input() public config: PokeCardConfig = {mode: 'vertical'};
   protected pokemonImg?: PokemonImages;
 
   public ngOnChanges(simpleChanges: SimpleChanges): void {

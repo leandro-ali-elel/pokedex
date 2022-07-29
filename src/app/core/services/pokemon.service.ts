@@ -2,12 +2,9 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Apollo, gql} from 'apollo-angular';
 import {Observable} from 'rxjs';
-import {first, map, pluck, switchMap} from 'rxjs/operators';
-import {
-  PokedexSortBy,
-  PokedexSortByOrder,
-} from 'src/app/views/dashboard/pokedex/pokedex.component';
+import {first, map, pluck, shareReplay, switchMap} from 'rxjs/operators';
 import {environment} from 'src/environments/environment';
+import {GET_ALL_POKEMONS} from '../graphql/queries/pokemon';
 import {Pokemons} from '../models/interfaces/pokemon';
 import {Trainer} from '../models/interfaces/trainer';
 
@@ -39,28 +36,12 @@ export const POKEMONS = gql`
   }
 `;
 
-export const POKEDEX = gql`
-  query Pokedex($order_by: [pokemon_v2_pokemon_order_by!], $search: String!) {
-    pokemon_v2_pokemon(order_by: $order_by, where: {name: {_regex: $search}}) {
-      id
-      name
-      pokemon_v2_pokemonstats(where: {stat_id: {_in: [1, 2, 3, 6]}}) {
-        pokemon_v2_stat {
-          name
-        }
-        base_stat
-      }
-      pokemon_v2_pokemonsprites {
-        sprites
-      }
-    }
-  }
-`;
-
 @Injectable({
   providedIn: 'root',
 })
 export class PokemonService {
+  private allPokemons$?: Observable<Pokemons>;
+
   constructor(private httpClient: HttpClient, private apollo: Apollo) {}
 
   public getTeam(username: string): Observable<Pokemons> {
@@ -77,19 +58,26 @@ export class PokemonService {
     );
   }
 
-  public getAllPokemons(order_by: Object, search: string): Observable<Pokemons> {
-    return this.apollo
-      .watchQuery({
-        query: POKEDEX,
-        variables: {
-          order_by,
-          search,
-        },
-      })
-      .valueChanges.pipe(
-        first(res => !res.loading),
-        pluck('data')
-      ) as Observable<Pokemons>;
+  public getAllPokemons(
+    order_by: Object,
+    search: string,
+    offset: number,
+    limit: number
+  ): Observable<Pokemons> {
+    if (!this.allPokemons$) {
+      return this.apollo
+        .query({
+          query: GET_ALL_POKEMONS,
+          variables: {
+            order_by,
+            search,
+            offset,
+            limit
+          },
+        })
+        .pipe(shareReplay(1), pluck('data')) as Observable<Pokemons>;
+    }
+    return this.allPokemons$;
   }
 
   public findTrainer(username: string): Observable<Trainer> {
@@ -102,6 +90,13 @@ export class PokemonService {
         return selectedTrainer;
       })
     );
+  }
+
+  public getPokemonCry(pokemonId: number): HTMLAudioElement {
+    const audio = new Audio();
+    audio.src = `${environment.criesSoundbankURL}${pokemonId}.mp3`;
+    audio.load();
+    return audio;
   }
 
   private getPokemonsFromCollectionId(ids: number[]): Observable<Pokemons> {

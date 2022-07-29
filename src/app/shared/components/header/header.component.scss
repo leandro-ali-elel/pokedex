@@ -1,0 +1,25 @@
+@import "/src/assets/sass/main.scss";
+
+.wrapper {
+    margin: 10px;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @include pokemon-border;
+        padding: 5px 15px;
+        margin: 15px 5px;
+
+        .logo {
+            font-weight: 600;
+            font-size: 2rem;
+        }
+
+        .user {
+            @include pokemon-border;
+            width: 30px;
+            height: 30px;
+        }
+    }
+}

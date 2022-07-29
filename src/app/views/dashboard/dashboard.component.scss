@@ -2,19 +2,20 @@
 
 .grid {
     display: grid;
-    grid-template-rows: auto;
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
     grid-template-areas:
         "header"
         "aside"
         "main";
 
-    // @include tablet() {
-    //     grid-template-areas:
-    //         "header header"
-    //         "aside main";
-    //     grid-template-columns: 2fr 8fr;
-    // }
+    @include tablet() {
+        grid-template-areas:
+            "header header"
+            "aside main";
+        grid-template-columns: 2fr 8fr;
+
+    }
 
     header {
         grid-area: header;

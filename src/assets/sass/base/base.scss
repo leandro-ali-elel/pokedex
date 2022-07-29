@@ -63,6 +63,11 @@ h3 {
     @include main-transition;
 }
 
+td {
+    font-size: #{"clamp(1.6rem, .4rem + 3vw, 2.2rem)"};
+    font-weight: 400;
+}
+
 p {
     font-size: #{"clamp(1.5rem, 0.6rem + 1vw, 1.8rem)"};
     color: $font-color-gray;
@@ -116,4 +121,11 @@ img {
         background-color: white;
         padding: 20px;
     }
+}
+
+.right-arrow {
+    transform: rotate(90deg);
+}
+.left-arrow {
+    transform: rotate(-90deg);
 }

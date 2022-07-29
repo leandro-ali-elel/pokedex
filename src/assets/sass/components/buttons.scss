@@ -12,16 +12,13 @@ button.btn {
     &.btn-primary {
         background-color: white;
 
-        .cursor {
-            opacity: 0;
-        }
-
-        &::before {
-            content: "▲";
-            transform: rotate(90deg);
-            animation: delayed-blink 2.5s infinite linear;
-            padding-top: 1.5rem;
-
+        &.cursor {
+            &::before {
+                content: "▲";
+                transform: rotate(90deg);
+                animation: delayed-blink 2.5s infinite linear;
+                padding-top: 1.5rem;
+            }
         }
     }
 

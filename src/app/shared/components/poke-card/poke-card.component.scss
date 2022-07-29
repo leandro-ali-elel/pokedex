@@ -30,66 +30,6 @@
             }
         }
     }
-
-    &.horizontal {
-        height: 100px;
-        padding: 10px;
-
-        .pokemon-card {
-            @include pokemon-border;
-            margin: 5px;
-            padding: 10px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            flex-direction: column;
-
-            h3 {
-                order: 2;
-                margin: auto;
-                flex: 1.8;
-            }
-
-            picture {
-                order: 1;
-                flex: 1;
-            }
-
-            p {
-                display: block;
-                order: 3;
-                flex: 1;
-                margin: auto;
-            }
-
-            .stats {
-                display: none;
-            }
-
-            img {
-                height: 64px;
-                width: 64px;
-            }
-
-            @include tablet() {
-                flex-direction: row;
-
-                img {
-                    height: 64px;
-                    width: 64px;
-                }
-
-                p {
-                }
-                .stats {
-                    display: block;
-                    order: 4;
-                    flex: 1;
-                }
-            }
-        }
-    }
 }
 
 @include tablet() {

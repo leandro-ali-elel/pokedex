@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {FooterModule} from './components/footer/footer.module';
 import {HeaderModule} from './components/header/header.module';
 import {PokeCardModule} from './components/poke-card/poke-card.module';
+import {ExtractPokemonModule} from './pipes/extract-pokemon.module';
 
 @NgModule({
   declarations: [],
@@ -14,7 +15,15 @@ import {PokeCardModule} from './components/poke-card/poke-card.module';
     PokeCardModule,
     ScrollingModule,
     PokeCardModule,
+    ExtractPokemonModule,
   ],
-  exports: [FooterModule, HeaderModule, PokeCardModule, ScrollingModule, PokeCardModule],
+  exports: [
+    FooterModule,
+    HeaderModule,
+    PokeCardModule,
+    ScrollingModule,
+    PokeCardModule,
+    ExtractPokemonModule,
+  ],
 })
 export class SharedModule {}

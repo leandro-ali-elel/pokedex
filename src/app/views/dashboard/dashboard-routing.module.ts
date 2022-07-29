@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {DashboardComponent} from './dashboard.component';
 
 const routes: Routes = [
   {
@@ -22,10 +22,6 @@ const routes: Routes = [
       {
         path: 'fight',
         loadChildren: () => import('./fight/fight.module').then(m => m.FightModule),
-      },
-      {
-        path: '**',
-        redirectTo: 'choose-team',
       },
     ],
   },

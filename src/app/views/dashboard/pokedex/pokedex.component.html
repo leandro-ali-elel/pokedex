@@ -1,12 +1,50 @@
-<ng-container *ngIf="(pokemons$ |async) as pokemons">
-    <cdk-virtual-scroll-viewport [itemSize]="pokemons.pokemon_v2_pokemon.length" class="example-viewport">
-        <div *cdkVirtualFor="let pokemon of pokemons.pokemon_v2_pokemon" class="example-item">
-            {{pokemon.name}}
-            {{pokemon.id}}
+<main class="viewport">
+    <ng-container *ngIf="(pokemons$ |async) as pokemons">
+        <div class="filters">
+            <label for="search">Search pokemon name:</label>
+            <input type="text" name="search" id="search" [formControl]="searchControl">
         </div>
-    </cdk-virtual-scroll-viewport>
-</ng-container>
+        <ng-container *ngIf="{ sortBy: sortBy$ | async, sortByOrder: sortByOrder$ | async } as tableState">
+            <div class="fake-table-header">
+                <div class="empty">
+                    Sprite
+                </div>
+                <div (click)="handleChangeTableSortOrder('name', tableState.sortBy!, tableState.sortByOrder!)"
+                    class="name">Name
+                    <ng-container *ngTemplateOutlet="sortIcons; context:{tableState, id:'name'}">
+                    </ng-container>
+                </div>
+                <div (click)="handleChangeTableSortOrder('id', tableState.sortBy!, tableState.sortByOrder!)" class="id">Id
+                    <ng-container *ngTemplateOutlet="sortIcons; context:{tableState, id:'id'}">
+                    </ng-container>
+                </div>
+                <div class="stats">Stats</div>
+                <div (click)="handleChangeTableSortOrder('id', tableState.sortBy!, tableState.sortByOrder!)" class="pokemon">Pokemon
+                    <ng-container *ngTemplateOutlet="sortIcons; context:{tableState, id:'id'}">
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+        <div></div>
+        <cdk-virtual-scroll-viewport itemSize="110" class="cdk-viewport">
+            <div *ngIf="pokemons.length <= 0" class="no-pokemons-message">
+                <p>Oops... we couldn't find any pokemons. Try changing the filter values!</p>
+            </div>
+            <div *cdkVirtualFor="let pokemon of pokemons" class="pokemon">
+                <poke-poke-card [pokemon]="pokemon" [config]="cardsConfig"></poke-poke-card>
+            </div>
+        </cdk-virtual-scroll-viewport>
 
-<ng-template #loadingPokemons>
-    <span>Loading pokemons...</span>
+        <div class="overlay-loading" *ngIf="isLoading">
+            <p>Loading new data...</p>
+        </div>
+
+    </ng-container>
+</main>
+
+<ng-template #sortIcons let-tableState="tableState" let-id="id">
+    <ng-container *ngIf="tableState.sortBy === id">
+        <ng-container *ngIf="tableState.sortByOrder === 'asc'">▲</ng-container>
+        <ng-container *ngIf="tableState.sortByOrder === 'desc'">▼</ng-container>
+    </ng-container>
 </ng-template>

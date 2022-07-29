@@ -1,15 +1,14 @@
-<div class="pokemon-card-wrapper">
+<div [ngClass]="{'horizontal': config.mode === 'horizontal', 'vertical': config.mode === 'vertical'}"
+    class="pokemon-card-wrapper">
     <div class="pokemon-card">
         <h3>{{pokemon.name}}</h3>
         <picture>
             <!-- 
-            avif, webp 
-            <source>
-            --->
-            <picture>
-                <source [srcset]="pokemonImg?.front_default">
-                <img class="pokemon-picture" width="238" height="238" src="" alt="">
-            </picture>
+                avif, webp 
+                <source>
+                --->
+            <source [srcset]="pokemonImg?.front_default">
+            <img class="pokemon-picture" width="238" height="238" src="" alt="">
         </picture>
         <p> No. {{pokemon.id}}</p>
         <div class="stats">

@@ -1,9 +1,103 @@
-.example-viewport {
-    height: 200px;
-    width: 200px;
-    border: 1px solid black;
-}
+@import "/src/assets/sass/main.scss";
 
-.example-item {
-    height: 50px;
+.viewport {
+    min-height: 400px;
+    margin: auto;
+    background-color: white;
+    width: 100%;
+    padding: 20px 0;
+    @include container-limit;
+
+    .cdk-viewport {
+        width: calc(100% - 20px);
+        height: 480px;
+        .no-pokemons-message {
+            margin: 20px auto;
+        }
+    }
+    .fake-table-header {
+        display: flex;
+        font-size: 1.8rem;
+        @include pokemon-border;
+        margin: 10px 45px 15px 15px;
+        padding: 10px;
+        margin-top: 20px;
+
+        .empty {
+            flex: 1.5;
+            order: 1;
+        }
+
+        .name {
+            display: none;
+            flex: 1.8;
+            order: 2;
+        }
+
+        .id {
+            display: none;
+            flex: 1;
+            order: 3;
+        }
+
+        .stats {
+            display: none;
+        }
+
+        .pokemon {
+            flex: 1;
+            order: 2;
+        }
+    }
+    .filters {
+        text-align: center;
+        padding: 10px;
+        @include pokemon-border;
+        margin: 10px 45px 15px 15px;
+        input {
+            text-align: start;
+            display: block;
+            max-width: 280px;
+            margin: auto;
+        }
+    }
+
+    @include tablet() {
+        padding: 20px;
+
+        .filters {
+            text-align: start;
+            input {
+                display: inline-block;
+                margin-left: 10px;
+            }
+        }
+
+        .fake-table-header {
+            > * {
+                cursor: pointer;
+            }
+            .pokemon {
+                display: none;
+            }
+            .empty {
+                flex: 1;
+            }
+            .name {
+                display: block;
+                flex: 1.8;
+                order: 2;
+            }
+            .id {
+                display: block;
+                flex: 1;
+                order: 3;
+            }
+            .stats {
+                display: block;
+                flex: 1;
+                order: 4;
+            }
+        }
+    }
 }

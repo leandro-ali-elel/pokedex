@@ -34,7 +34,6 @@ ul {
 }
 
 * {
-    @include main-transition;
     color: $color-black;
     font-family: "pokemon";
 }
@@ -47,18 +46,21 @@ header {
 h1 {
     margin: 1rem 0 #{"clamp(0.5rem, 0.2rem + 3vw, 2.8rem)"} 0;
     font-size: #{"clamp(2.4rem, .4rem + 2vw, 5.6rem)"};
+    @include main-transition;
 }
 
 h2 {
     margin: 1rem 0 #{"clamp(0.5rem, 0.2rem + 3vw, 2.8rem)"} 0;
     font-size: #{"clamp(2rem, .4rem + 3vw, 3.8rem)"};
     font-weight: 300;
+    @include main-transition;
 }
 
 h3 {
     margin: 1rem 0 #{"clamp(0.3rem, 0.2rem + 3vw, 2.2rem)"} 0;
-    font-size: #{"clamp(1.6rem, .4rem + 3vw, 2.2rem)"};
+    font-size: #{"clamp(1.8rem, .4rem + 3vw, 2.2rem)"};
     font-weight: 300;
+    @include main-transition;
 }
 
 p {
@@ -67,6 +69,7 @@ p {
     margin: 0 auto;
     margin-bottom: 2rem;
     max-inline-size: 80ch;
+    @include main-transition;
 }
 
 img {
@@ -74,10 +77,43 @@ img {
     max-inline-size: 100%;
     block-size: auto;
     display: block;
-    filter: grayscale(.9);
-    image-rendering: pixelated
+    filter: grayscale(0.9);
+    image-rendering: pixelated;
 }
 
-section {
-    text-align: center;
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: white;
+    @include pokemon-border;
+}
+::-webkit-scrollbar-thumb {
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(225, 225, 225);
+}
+
+.overlay-loading {
+    @include flex-center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    p {
+        @include pokemon-border;
+        background-color: white;
+        padding: 20px;
+    }
 }

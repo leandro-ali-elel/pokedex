@@ -1,7 +1,16 @@
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl} from '@angular/forms';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
-import {Pokemons} from 'src/app/core/models/interfaces/pokemon';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  pluck,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
+import {Pokemon} from 'src/app/core/models/interfaces/pokemon';
+import {PokeCardConfig} from 'src/app/shared/components/poke-card/poke-card.component';
 import {PokedexFacade} from './pokedex.facade';
 
 export type PokedexSortBy = 'id' | 'name';
@@ -13,16 +22,30 @@ export type PokedexSortByOrder = 'asc' | 'desc';
   styleUrls: ['./pokedex.component.scss'],
 })
 export class PokedexComponent implements OnInit {
-  protected pokemons$!: Observable<Pokemons>;
-  protected resultsPerPage$ = new BehaviorSubject<number>(15);
+  protected cardsConfig: PokeCardConfig = {mode: 'horizontal'};
+  protected searchControl = new FormControl('');
+  protected pokemons$!: Observable<Pokemon[]>;
   protected sortBy$ = new BehaviorSubject<PokedexSortBy>('id');
   protected sortByOrder$ = new BehaviorSubject<PokedexSortByOrder>('asc');
-  protected offset$ = new BehaviorSubject<number>(0);
-  
+  protected isLoading = true;
   constructor(private pokedexFacade: PokedexFacade) {}
 
   public ngOnInit(): void {
     this.setUpStreams();
+  }
+
+  protected handleChangeTableSortOrder(
+    column: PokedexSortBy,
+    sortBy: PokedexSortBy,
+    sortByOrder: PokedexSortByOrder
+  ) {
+    if (column === sortBy) {
+      const nextOrder = sortByOrder === 'asc' ? 'desc' : 'asc';
+      this.sortByOrder$.next(nextOrder);
+      return;
+    }
+    this.sortBy$.next(column);
+    this.sortByOrder$.next('asc');
   }
 
   private setUpStreams(): void {
@@ -30,15 +53,20 @@ export class PokedexComponent implements OnInit {
   }
 
   private listenPokedexEvents(): void {
-    this.pokemons$ = combineLatest([
-      this.resultsPerPage$,
-      this.sortBy$,
-      this.sortByOrder$,
-      this.offset$,
-    ]).pipe(
-      switchMap(([resultsPerPage, sortBy, sortByOrder, offset]) =>
-        this.pokedexFacade.getAllPokemons(resultsPerPage, sortBy, sortByOrder, offset)
-      )
+    const searchName$ = this.searchControl.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      startWith('')
+    );
+
+    this.pokemons$ = combineLatest([this.sortBy$, this.sortByOrder$, searchName$]).pipe(
+      debounceTime(300),
+      tap(() => (this.isLoading = true)),
+      switchMap(([sortBy, sortByOrder, searchName]) =>
+        this.pokedexFacade.getAllPokemons(sortBy, sortByOrder, searchName)
+      ),
+      pluck('pokemon_v2_pokemon'),
+      tap(() => (this.isLoading = false))
     );
   }
 }

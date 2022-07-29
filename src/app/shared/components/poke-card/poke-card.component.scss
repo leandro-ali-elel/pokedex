@@ -1,31 +1,93 @@
 @import "/src/assets/sass/main.scss";
 
 .pokemon-card-wrapper {
-    @include flex-center;
+    &.vertical {
+        @include flex-center;
 
-    .pokemon-card {
-        @include pokemon-border;
-        @include flex-column;
-        padding: 20px;
-        width: 100%;
-        max-width: 280px;
-        text-transform: capitalize;
+        .pokemon-card {
+            @include pokemon-border;
+            @include flex-column;
+            padding: 20px;
+            width: 100%;
+            max-width: 280px;
+            text-transform: capitalize;
 
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-auto-rows: 1fr;
+            .stats {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-auto-rows: 1fr;
 
-            .stat {
-                text-align: start;
-                padding: 5px;
+                .stat {
+                    text-align: start;
+                    padding: 5px;
+                }
+            }
+
+            .pokemon-picture {
+                height: 128px;
+                width: 128px;
+                margin: auto;
             }
         }
+    }
 
-        .pokemon-picture {
-            height: 128px;
-            width: 128px;
-            margin: auto;
+    &.horizontal {
+        height: 100px;
+        padding: 10px;
+
+        .pokemon-card {
+            @include pokemon-border;
+            margin: 5px;
+            padding: 10px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-direction: column;
+
+            h3 {
+                order: 2;
+                margin: auto;
+                flex: 1.8;
+            }
+
+            picture {
+                order: 1;
+                flex: 1;
+            }
+
+            p {
+                display: block;
+                order: 3;
+                flex: 1;
+                margin: auto;
+            }
+
+            .stats {
+                display: none;
+            }
+
+            img {
+                height: 64px;
+                width: 64px;
+            }
+
+            @include tablet() {
+                flex-direction: row;
+
+                img {
+                    height: 64px;
+                    width: 64px;
+                }
+
+                p {
+                }
+                .stats {
+                    display: block;
+                    order: 4;
+                    flex: 1;
+                }
+            }
         }
     }
 }
@@ -38,4 +100,12 @@
             }
         }
     }
+}
+
+img {
+    object-fit: contain;
+}
+
+h3 {
+    text-transform: capitalize;
 }

@@ -9,15 +9,10 @@ export class PokedexFacade {
   constructor(private pokemonService: PokemonService) {}
 
   public getAllPokemons(
-    resultsPerPage: number,
     sortBy: PokedexSortBy,
     sortByOrder: PokedexSortByOrder,
-    offset: number
+    searchName: string | null
   ): Observable<Pokemons> {
-    return this.pokemonService.getAllPokemons(
-      resultsPerPage,
-      {[sortBy]: sortByOrder},
-      offset
-    );
+    return this.pokemonService.getAllPokemons({[sortBy]: sortByOrder}, searchName ?? '');
   }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
+import {BehaviorSubject, combineLatest, EMPTY, Observable, of} from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -30,6 +30,7 @@ export class PokedexComponent implements OnInit {
   protected pokemons$!: Observable<Pokemons>;
   protected sortBy$ = new BehaviorSubject<PokedexSortBy>('id');
   protected sortByOrder$ = new BehaviorSubject<PokedexSortByOrder>('asc');
+  protected triggerTable$ = new BehaviorSubject<null>(null);
   protected offset$ = new BehaviorSubject<number>(0);
   protected limit$ = new BehaviorSubject<number>(10);
 
@@ -59,6 +60,7 @@ export class PokedexComponent implements OnInit {
     const limit = this.limit$.getValue();
     const nextOffset = currentOffset + step * limit;
     this.offset$.next(nextOffset);
+    this.triggerTable$.next(null);
   }
 
   protected playPokemonCry(pokemonId: number): void {
@@ -77,17 +79,25 @@ export class PokedexComponent implements OnInit {
       startWith('')
     );
 
-    this.pokemons$ = combineLatest([
+    const volatileFilters$ = combineLatest([
       this.limit$,
       this.sortBy$,
       this.sortByOrder$,
       searchName$,
-      this.offset$,
-    ]).pipe(
-      tap(_ => {
-        this.isLoading = true;
-      }),
-      switchMap(([limit, sortBy, sortByOrder, searchName, offset]) =>
+    ]).pipe(tap(() => this.offset$.next(0)));
+
+    /* 
+    The problem with this approach lies on the difficulty of managing side effects.
+    When a volatile filter changes, offset should reset to 0, which is a pretty difficult
+    task to do without firing dangerous side effects inside the chain.
+    I think this approach could be a little sloopy sometimes...
+    but gets the job done without firing side effects.
+    Maybe offset shouldn't be a Subject? Only God knows. 
+    */
+    this.pokemons$ = combineLatest([volatileFilters$, this.triggerTable$]).pipe(
+      withLatestFrom(this.offset$),
+      tap(_ => (this.isLoading = true)),
+      switchMap(([[[limit, sortBy, sortByOrder, searchName], _], offset]) =>
         this.pokedexFacade.getAllPokemons(offset, limit, sortBy, sortByOrder, searchName)
       ),
       tap(() => {

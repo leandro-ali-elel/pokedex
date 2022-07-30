@@ -7,6 +7,7 @@ import {AppComponent} from './app.component';
 import {SharedModule} from './shared/shared.module';
 import {HttpClientModule} from '@angular/common/http';
 import {GraphQLModule} from './graphql.module';
+import { StoreModule } from '@ngrx/store';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -15,6 +16,7 @@ import {GraphQLModule} from './graphql.module';
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],

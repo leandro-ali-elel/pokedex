@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
     "@apollo/client": "^3.0.0",
+    "@ngrx/store": "^14.0.2",
     "apollo-angular": "^3.0.1",
     "express": "^4.18.1",
     "graphql": "^16",
@@ -55,7 +56,8 @@
     "prettier": "^2.7.1",
     "prettier-eslint": "^15.0.1",
     "typescript": "~4.6.4",
-    "webpack-bundle-analyzer": "^4.5.0"
+    "webpack-bundle-analyzer": "^4.5.0",
+    "@ngrx/eslint-plugin": "^14.0.2"
   },
   "engines": {
     "node": "14.17.1",

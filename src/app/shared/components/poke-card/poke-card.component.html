@@ -8,7 +8,7 @@
                 avif, webp 
                 <source>
                 --->
-                <source [srcset]="pokemonImg?.front_default">
+                <source [srcset]="(pokemon.pokemon_v2_pokemonsprites[0].sprites | extractPokemonImage)">
                 <img class="pokemon-picture" width="238" height="238" src="" alt="">
             </picture>
             <div class="types">

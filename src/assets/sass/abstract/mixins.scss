@@ -45,7 +45,6 @@
 
 @mixin pokemon-border() {
     border-radius: 3.5px;
-    margin: 1rem 0.5rem;
     border: 1px solid $color-black;
     outline: 2px solid $color-black;
     outline-offset: 3px;

@@ -51,7 +51,7 @@ h1 {
 
 h2 {
     margin: 1rem 0 #{"clamp(0.5rem, 0.2rem + 3vw, 2.8rem)"} 0;
-    font-size: #{"clamp(2rem, .4rem + 3vw, 3.8rem)"};
+    font-size: #{"clamp(2rem, .4rem + 2vw, 3.8rem)"};
     font-weight: 300;
     @include main-transition;
 }
@@ -126,4 +126,8 @@ img {
 .modal-backdrop {
     background-color: rgba(0, 0, 0, 0.7);
     animation: "fade-in" 500ms;
+}
+
+nav {
+    margin: 0;
 }

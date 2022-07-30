@@ -13,7 +13,14 @@
         grid-template-areas:
             "header header"
             "aside main";
-        grid-template-columns: 2fr 8fr;
+        grid-template-columns: minmax(210px, 2fr) 8fr;
+    }
+
+    header,
+    aside,
+    main {
+        margin: 10px;
+        @include pokemon-border;
     }
 
     header {
@@ -23,10 +30,7 @@
         grid-area: aside;
 
         nav {
-            @include pokemon-border;
             height: 100%;
-            margin-left: 10px;
-            min-height: 800px;
 
             ul {
                 li {
@@ -39,7 +43,7 @@
                         background-color: $color-lightgray;
 
                         &::before {
-                            content: '► ';
+                            content: "► ";
                         }
                     }
                 }
@@ -48,6 +52,8 @@
     }
     main {
         grid-area: main;
+        padding: 10px;
+        min-height: 800px;
     }
 }
 

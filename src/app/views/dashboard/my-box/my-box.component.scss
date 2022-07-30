@@ -1,15 +1,18 @@
 @import "/src/assets/sass/main.scss";
 main {
-    padding: 0 20px;
     text-align: center;
 
     .my-box {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 10px;
+        grid-gap: 20px;
         @include container-limit();
 
-        @include tablet() {
+        @include mobile-lg() {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include desktop() {
             grid-template-columns: repeat(4, 1fr);
         }
     }

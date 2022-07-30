@@ -12,11 +12,9 @@ export class DadJokesService {
   constructor(private apollo: Apollo) {}
 
   public getJoke(): Observable<Joke> {
-    const time = 4000; //20s
-    return timer(0, time).pipe(
-      switchMap(_ =>
-        this.apollo.use('jokes').query({query: GET_JOKES}).pipe(pluck('data'))
-      )
-    ) as Observable<Joke>;
+    return this.apollo
+      .use('jokes')
+      .query({query: GET_JOKES})
+      .pipe(pluck('data')) as Observable<Joke>;
   }
 }

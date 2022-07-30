@@ -21,6 +21,7 @@
         background-color: white;
         @include pokemon-border;
         padding: 20px;
+        margin: 20px;
 
         .times {
             position: absolute;

@@ -45,31 +45,31 @@ header {
 
 h1 {
     margin: 1rem 0 #{"clamp(0.5rem, 0.2rem + 3vw, 2.8rem)"} 0;
-    font-size: #{"clamp(2.4rem, .4rem + 2vw, 5.6rem)"};
+    font-size: #{"clamp(2.4rem, .4rem + 1vw, 5.6rem)"};
     @include main-transition;
 }
 
 h2 {
     margin: 1rem 0 #{"clamp(0.5rem, 0.2rem + 3vw, 2.8rem)"} 0;
-    font-size: #{"clamp(2rem, .4rem + 2vw, 3.8rem)"};
+    font-size: #{"clamp(2rem, .4rem + 1vw, 3.4rem)"};
     font-weight: 300;
     @include main-transition;
 }
 
 h3 {
     margin: 1rem 0 #{"clamp(0.3rem, 0.2rem + 3vw, 2.2rem)"} 0;
-    font-size: #{"clamp(1.8rem, .4rem + 3vw, 2.2rem)"};
+    font-size: #{"clamp(1.8rem, .4rem + 1vw, 2.2rem)"};
     font-weight: 300;
     @include main-transition;
 }
 
 td {
-    font-size: #{"clamp(1.6rem, .4rem + 3vw, 2.2rem)"};
+    font-size: #{"clamp(1.6rem, .4rem + 1vw, 2rem)"};
     font-weight: 400;
 }
 
 p {
-    font-size: #{"clamp(1.5rem, 0.6rem + 1vw, 1.8rem)"};
+    font-size: #{"clamp(1.5rem, 0.6rem + 1vw, 1.6rem)"};
     color: $color-black;
     margin: 0 auto;
     margin-bottom: 2rem;

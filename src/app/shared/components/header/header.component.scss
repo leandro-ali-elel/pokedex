@@ -14,8 +14,12 @@
 
         .user {
             @include pokemon-border;
-            width: 30px;
-            height: 30px;
+            padding: 10px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $color-hover;
+            }
         }
     }
 }

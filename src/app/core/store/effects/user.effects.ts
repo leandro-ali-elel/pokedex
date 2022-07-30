@@ -3,6 +3,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Action} from '@ngrx/store';
 import {of} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
+import {AuthService} from '../../services/auth.service';
 import {PokemonService} from '../../services/pokemon.service';
 import {ToastService} from '../../services/toast.service';
 import {authApiActions} from '../actions/user.actions';
@@ -15,8 +16,7 @@ export class UserEffects {
       mergeMap((payload: Action & {username: string}) =>
         this.pokemonService.findTrainer(payload.username).pipe(
           map(trainer => {
-            // there I would call an authService or smt like that
-            localStorage.setItem('username', trainer.name);
+            this.authService.saveSession(trainer.name);
             return authApiActions.loginSuccess({trainer});
           }),
           catchError(error => {
@@ -31,6 +31,7 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private pokemonService: PokemonService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authService: AuthService
   ) {}
 }

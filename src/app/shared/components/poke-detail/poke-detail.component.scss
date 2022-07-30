@@ -15,6 +15,7 @@
             display: flex;
             flex-direction: column;
             .species-column {
+                flex-wrap: wrap;
                 flex: 1;
                 display: flex;
                 align-self: center;

@@ -5,7 +5,7 @@
                 <label for="username">Your username? </label>
                 <input type="text" placeholder="Red" aria-autocomplete="username" name="username" id="username"
                     aria-required="true" formControlName="username">
-                <button class="btn btn-primary cursor" type="submit" (click)="handleLoginRequest()">
+                <button [disabled]="form.invalid" class="btn btn-primary cursor" type="submit" (click)="handleLoginRequest()">
                     LOGIN
                 </button>
             </form>

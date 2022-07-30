@@ -7,5 +7,6 @@ export const authApiActions = createActionGroup({
     'Login Request': props<{username: string}>(),
     'Login Success': props<{trainer: Trainer}>(),
     'Login Failure': props<{error: string}>(),
+    'Logout': props<any>(),
   },
 });

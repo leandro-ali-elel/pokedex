@@ -10,7 +10,7 @@ import {EntryService} from './entry.service';
 })
 export class EntryComponent implements OnInit {
   protected form = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    username: new FormControl('', Validators.required),
   });
 
   constructor(private entryService: EntryService, private router: Router) {}
@@ -20,12 +20,6 @@ export class EntryComponent implements OnInit {
   }
 
   public handleLoginRequest(): void {
-    if (this.form.invalid) {
-      alert(
-        'oops, there is something wrong with the form, search for red messages to find where!'
-      );
-      return;
-    }
     this.entryService.requestLogin(this.form.value['username']!);
   }
 

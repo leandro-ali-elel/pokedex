@@ -1,11 +1,11 @@
-import {createAction, props} from '@ngrx/store';
+import {createActionGroup, props} from '@ngrx/store';
+import {Trainer} from '../../models/interfaces/trainer';
 
-export const loginAction = createAction(
-  '[Entry] Login Request',
-  props<{username: string}>()
-);
-
-export const trainerFoundAction = createAction(
-  '[Poke API] Trainer Found',
-  props<{user: any}>()
-);
+export const authApiActions = createActionGroup({
+  source: 'Auth API',
+  events: {
+    'Login Request': props<{username: string}>(),
+    'Login Success': props<{trainer: Trainer}>(),
+    'Login Failure': props<{error: string}>(),
+  },
+});

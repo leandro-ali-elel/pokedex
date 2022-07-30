@@ -7,9 +7,10 @@ import {ModalModule} from './components/modal/modal.module';
 import {PokeCardModule} from './components/poke-card/poke-card.module';
 import {PokeDetailModule} from './components/poke-detail/poke-detail.module';
 import {ExtractPokemonModule} from './pipes/extract-pokemon.module';
+import {ToastComponent} from './toast/toast.component';
+import {ToastModule} from './toast/toast.module';
 
 @NgModule({
-  declarations: [],
   imports: [],
   exports: [
     FooterModule,
@@ -20,6 +21,7 @@ import {ExtractPokemonModule} from './pipes/extract-pokemon.module';
     ModalModule,
     OverlayModule,
     PokeDetailModule,
+    ToastModule,
   ],
 })
 export class SharedModule {}

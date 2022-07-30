@@ -1,0 +1,13 @@
+@import "/src/assets/sass/main.scss";
+
+.toast-container {
+    padding: 20px;
+    margin: 20px;
+    @include pokemon-border;
+    &--error {
+        background-color: $color-pink;
+    }
+    &--info {
+        background-color: $color-info;
+    }
+}

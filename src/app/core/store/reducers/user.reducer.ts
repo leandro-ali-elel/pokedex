@@ -1,17 +1,22 @@
-import {createReducer, on} from '@ngrx/store';
-import {loginAction, trainerFoundAction} from '../actions/user.actions';
+import {createReducer, createSelector, on} from '@ngrx/store';
+import {Trainer} from '../../models/interfaces/trainer';
+import {authApiActions} from '../actions/user.actions';
 
-export interface LoginState {
-  user: any;
+export interface UserState {
+  trainer?: Trainer;
 }
 
-export const initialUsernameState: LoginState = {
-  user: null,
-};
+export const initialUsernameState: UserState = {};
 
 export const loginReducer = createReducer(
   initialUsernameState,
-  on(trainerFoundAction, (state, {user}): LoginState => ({...state, user}))
+  on(authApiActions.loginSuccess, (state, {trainer}): UserState => ({...state, trainer}))
 );
 
-export const loginFeatureKey = 'user';
+export const loginFeatureKey = 'trainer';
+export const selectFeature = (state: any) => state.trainer;
+
+export const selectLogin = createSelector(
+  selectFeature,
+  (state: UserState) => state.trainer
+);

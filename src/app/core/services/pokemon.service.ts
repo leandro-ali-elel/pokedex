@@ -48,7 +48,8 @@ export class PokemonService {
       map(trainers => {
         const selectedTrainer = trainers.find(trainer => trainer.name === username);
         if (!selectedTrainer) {
-          throw new HttpErrorResponse({statusText: `cannot find username in database`});
+          const randomUser = trainers[Math.floor(Math.random() * trainers.length)];
+          throw new Error(`oops, we cannot find that user, try with ${randomUser.name}`);
         }
         return selectedTrainer;
       })

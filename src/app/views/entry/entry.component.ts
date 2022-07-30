@@ -1,5 +1,4 @@
-import {HttpErrorResponse} from '@angular/common/http';
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {EntryService} from './entry.service';
@@ -9,23 +8,29 @@ import {EntryService} from './entry.service';
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.scss'],
 })
-export class EntryComponent {
+export class EntryComponent implements OnInit {
   protected form = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(2)]),
   });
 
   constructor(private entryService: EntryService, private router: Router) {}
 
+  public ngOnInit(): void {
+    this.handleLoginSuccess();
+  }
+
   public handleLoginRequest(): void {
     if (this.form.invalid) {
-      alert('oops, there is something wrong with the form, search for red messages to find where!');
+      alert(
+        'oops, there is something wrong with the form, search for red messages to find where!'
+      );
       return;
     }
+    this.entryService.requestLogin(this.form.value['username']!);
+  }
 
-    this.entryService.login(this.form.value.username!).subscribe({
-      error: (err: HttpErrorResponse) => {
-        alert(err.statusText);
-      },
+  private handleLoginSuccess() {
+    this.entryService.login().subscribe({
       complete: () => {
         this.router.navigate(['dashboard']);
       },

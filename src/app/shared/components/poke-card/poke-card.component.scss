@@ -1,33 +1,33 @@
 @import "/src/assets/sass/main.scss";
 
 .pokemon-card-wrapper {
-    &.vertical {
-        @include flex-center;
+    @include flex-center;
 
-        .pokemon-card {
-            @include pokemon-border;
-            @include flex-column;
-            padding: 20px;
-            width: 100%;
-            max-width: 280px;
-            text-transform: capitalize;
+    .pokemon-card {
+        @include pokemon-border;
+        @include flex-column;
+        width: 100%;
+        max-width: 280px;
+        text-transform: capitalize;
 
-            .stats {
-                display: grid;
-                grid-template-columns: 1fr;
-                grid-auto-rows: 1fr;
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-auto-rows: 1fr;
+            padding: 10px;
 
-                .stat {
-                    text-align: start;
-                    padding: 5px;
-                }
+            .stat {
+                text-align: start;
+                padding: 5px;
             }
-
-            .pokemon-picture {
-                height: 128px;
-                width: 128px;
-                margin: auto;
-            }
+        }
+        .pokemon-id {
+            padding: 10px;
+        }
+        .pokemon-picture {
+            height: 128px;
+            width: 128px;
+            margin: auto;
         }
     }
 }
@@ -48,4 +48,83 @@ img {
 
 h3 {
     text-transform: capitalize;
+}
+
+.bg {
+    position: relative;
+
+    .overlay-retro {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.75);
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+    &--grass {
+        background-color: $color-poke-bg-grass;
+    }
+    &--fire {
+        background-color: $color-poke-bg-fire;
+    }
+    &--poison {
+        background-color: $color-poke-bg-poison;
+    }
+    &--flying {
+        background-color: $color-poke-bg-flying;
+    }
+    &--water {
+        background-color: $color-poke-bg-water;
+    }
+    &--bug {
+        background-color: $color-poke-bg-bug;
+    }
+    &--normal {
+        background-color: $color-poke-bg-normal;
+    }
+    &--electric {
+        background-color: $color-poke-bg-electric;
+    }
+    &--ground {
+        background-color: $color-poke-bg-ground;
+    }
+    &--fairy {
+        background-color: $color-poke-bg-fairy;
+    }
+    &--fighting {
+        background-color: $color-poke-bg-fighting;
+    }
+    &--psychic {
+        background-color: $color-poke-bg-psychic;
+    }
+    &--steel {
+        background-color: $color-poke-bg-steel;
+    }
+    &--ghost {
+        background-color: $color-poke-bg-ghost;
+    }
+    &--rock {
+        background-color: $color-poke-bg-rock;
+    }
+    &--dragon {
+        background-color: $color-poke-bg-dragon;
+    }
+    &--ice {
+        background-color: $color-poke-bg-ice;
+    }
+    &--dark {
+        background-color: $color-poke-bg-dark;
+    }
+
+    .types {
+        display: flex;
+        justify-content: center;
+        button {
+            z-index: 1;
+            width: 100%;
+            max-width: 160px;
+            margin: 10px;
+            text-align: center;
+        }
+    }
 }

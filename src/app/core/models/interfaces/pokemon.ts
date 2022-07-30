@@ -17,7 +17,7 @@ export interface Pokemon {
     pokemon_v2_type: {
       id: number;
       name: string;
-    }[];
+    };
   }[];
 }
 

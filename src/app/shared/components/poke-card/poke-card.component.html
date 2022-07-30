@@ -1,15 +1,21 @@
 <div class="pokemon-card-wrapper">
     <div class="pokemon-card">
         <h3>{{pokemon.name}}</h3>
-        <picture>
-            <!-- 
+        <div class="bg bg--{{pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type.name}}">
+            <div class="overlay-retro"></div>
+            <picture>
+                <!-- 
                 avif, webp 
                 <source>
                 --->
-            <source [srcset]="pokemonImg?.front_default">
-            <img class="pokemon-picture" width="238" height="238" src="" alt="">
-        </picture>
-        <p> No. {{pokemon.id}}</p>
+                <source [srcset]="pokemonImg?.front_default">
+                <img class="pokemon-picture" width="238" height="238" src="" alt="">
+            </picture>
+            <div class="types">
+                <button class="btn">{{pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type.name}}</button>
+            </div>
+        </div>
+        <p class="pokemon-id"> No. {{pokemon.id}}</p>
         <div class="stats">
             <ng-container *ngFor="let stat of pokemon.pokemon_v2_pokemonstats">
                 <div class="stat"><b>{{stat.pokemon_v2_stat.name}}</b>: {{stat.base_stat}}</div>

@@ -1,6 +1,9 @@
 export interface Pokemon {
   id: number;
   name: string;
+  pokemon_v2_pokemonspecy: {
+    evolution_chain_id: number;
+  };
   pokemon_v2_pokemonstats: {
     base_stat: number;
     pokemon_v2_stat: {
@@ -15,7 +18,6 @@ export interface Pokemon {
       id: number;
       name: string;
     }[];
-   
   }[];
 }
 

@@ -1,7 +1,7 @@
 <main class="viewport">
     <ng-container *ngIf="(pokemons$ |async) as pokemons">
         <div class="filters">
-            <label for="search">Search pokemon name:</label>
+            <label for="search">Search pokemon by name or ID:</label>
             <input type="text" name="search" id="search" [formControl]="searchControl">
         </div>
         <ng-container *ngIf="{ sortBy: sortBy$ | async, sortByOrder: sortByOrder$ | async } as tableState">
@@ -32,9 +32,10 @@
                         </td>
                     </tr>
 
-                    <tr *ngFor="let pokemon of pokemons.pokemon_v2_pokemon" class="pokemon">
+                    <tr (click)="handleRequestPokemonDetails(pokemon)"
+                        *ngFor="let pokemon of pokemons.pokemon_v2_pokemon" class="pokemon">
                         <td class="sprite">
-                            <img (click)="playPokemonCry(pokemon.id)" width="96" height="96"
+                            <img width="96" height="96"
                                 [src]="(pokemon.pokemon_v2_pokemonsprites[0].sprites | extractPokemonImage)" alt="">
                         </td>
                         <td class="name">{{pokemon.name}}</td>
@@ -49,8 +50,7 @@
                     <button [disabled]="pagination.offset === 0" (click)="handleChangePage(-1)" class="btn btn-primary">
                         <span class="left-arrow">▲</span>
                     </button>
-                    <button [disabled]="pagination.offset === 15" (click)="handleChangePage(1)"
-                        class="btn btn-primary">
+                    <button [disabled]="pagination.offset === 15" (click)="handleChangePage(1)" class="btn btn-primary">
                         <span class="right-arrow">▲</span>
                     </button>
                 </div>

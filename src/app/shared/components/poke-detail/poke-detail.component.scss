@@ -1,0 +1,62 @@
+@import "/src/assets/sass/main.scss";
+
+.wrapper {
+    text-align: center;
+
+    .content {
+        overflow: auto;
+        max-width: 100%;
+        .species-container {
+            display: flex;
+            flex-direction: column;
+            .species-column {
+                flex: 1;
+                display: flex;
+                align-self: center;
+
+                .species {
+                    flex: 1;
+                    padding: 10px;
+
+                    .name {
+                        margin: 0;
+                        text-transform: capitalize;
+                    }
+                    img {
+                        width: 98px;
+                        height: 98px;
+                        margin: auto;
+                        @include main-transition;
+
+                        &:hover {
+                            cursor: pointer;
+                            filter: grayscale(0.1);
+                            transform: scale(1.2);
+                        }
+                    }
+                }
+            }
+        }
+
+        .loading-evolutions {
+            text-align: center;
+            padding-top: 30px;
+        }
+    }
+}
+
+@include tablet() {
+    .wrapper {
+        .content {
+            .species-container {
+                flex-direction: row;
+
+                .species-column {
+                    flex-direction: column;
+                    .species {
+                    }
+                }
+            }
+        }
+    }
+}

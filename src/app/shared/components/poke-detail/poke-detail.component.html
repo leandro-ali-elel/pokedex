@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <h1>Evolution Chain</h1>
+    <div class="content">
+        <ng-container *ngIf="(pokemon$ | async) as chain; else loading">
+            <ng-container *ngFor="let evolutionChain of chain.pokemon_v2_evolutionchain">
+
+                <div class="species-container">
+                    <div class="species-column" *ngFor="let specie of evolutionChain.pokemon_v2_pokemonspecies">
+                        <div class="species" *ngFor="let pokemon of specie.pokemon_v2_pokemons">
+                            <img (click)="playPokemonCry(pokemon.id)" width="98" height="98"
+                                [src]="(pokemon.pokemon_v2_pokemonsprites[0].sprites | extractPokemonImage)" alt="">
+                            <p class="name"> {{pokemon.name}}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-container>
+        </ng-container>
+        <ng-template #loading>
+            <div class="loading">
+                <p>Loading evolutions...</p>
+            </div>
+        </ng-template>
+    </div>
+</div>

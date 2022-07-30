@@ -1,19 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {BehaviorSubject, combineLatest, EMPTY, Observable, of} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
   map,
-  sample,
   startWith,
   switchMap,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import {normalize} from 'src/app/core/graphql/queries/strings';
-import {Pokemons} from 'src/app/core/models/interfaces/pokemon';
-import {PokeCardConfig} from 'src/app/shared/components/poke-card/poke-card.component';
+import {Pokemon, Pokemons} from 'src/app/core/models/interfaces/pokemon';
+import {normalize} from 'src/app/utils/strings';
 import {PokedexFacade} from './pokedex.facade';
 
 export type PokedexSortBy = 'id' | 'name';
@@ -25,20 +23,27 @@ export type PokedexSortByOrder = 'asc' | 'desc';
   styleUrls: ['./pokedex.component.scss'],
 })
 export class PokedexComponent implements OnInit {
-  protected cardsConfig: PokeCardConfig = {mode: 'horizontal'};
-  protected searchControl = new FormControl('');
+  protected isLoading = true;
+  protected limit$ = new BehaviorSubject<number>(10);
+  protected offset$ = new BehaviorSubject<number>(0);
   protected pokemons$!: Observable<Pokemons>;
+  protected searchControl = new FormControl('');
   protected sortBy$ = new BehaviorSubject<PokedexSortBy>('id');
   protected sortByOrder$ = new BehaviorSubject<PokedexSortByOrder>('asc');
   protected triggerTable$ = new BehaviorSubject<null>(null);
-  protected offset$ = new BehaviorSubject<number>(0);
-  protected limit$ = new BehaviorSubject<number>(10);
 
-  protected isLoading = true;
   constructor(private pokedexFacade: PokedexFacade) {}
 
   public ngOnInit(): void {
     this.setUpStreams();
+  }
+
+  protected handleChangePage(step: number): void {
+    const currentOffset = this.offset$.getValue();
+    const limit = this.limit$.getValue();
+    const nextOffset = currentOffset + step * limit;
+    this.offset$.next(nextOffset);
+    this.triggerTable$.next(null);
   }
 
   protected handleChangeTableSortOrder(
@@ -55,20 +60,8 @@ export class PokedexComponent implements OnInit {
     this.sortByOrder$.next('asc');
   }
 
-  protected handleChangePage(step: number): void {
-    const currentOffset = this.offset$.getValue();
-    const limit = this.limit$.getValue();
-    const nextOffset = currentOffset + step * limit;
-    this.offset$.next(nextOffset);
-    this.triggerTable$.next(null);
-  }
-
-  protected playPokemonCry(pokemonId: number): void {
-    this.pokedexFacade.playPokemonCry(pokemonId);
-  }
-
-  private setUpStreams(): void {
-    this.listenPokedexEvents();
+  protected handleRequestPokemonDetails(pokemon: Pokemon): void {
+    this.pokedexFacade.showPokemonDetails(pokemon);
   }
 
   private listenPokedexEvents(): void {
@@ -105,5 +98,9 @@ export class PokedexComponent implements OnInit {
         this.isLoading = false;
       })
     );
+  }
+
+  private setUpStreams(): void {
+    this.listenPokedexEvents();
   }
 }

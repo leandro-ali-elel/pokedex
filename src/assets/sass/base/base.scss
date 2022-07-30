@@ -70,7 +70,7 @@ td {
 
 p {
     font-size: #{"clamp(1.5rem, 0.6rem + 1vw, 1.8rem)"};
-    color: $font-color-gray;
+    color: $color-black;
     margin: 0 auto;
     margin-bottom: 2rem;
     max-inline-size: 80ch;
@@ -128,4 +128,9 @@ img {
 }
 .left-arrow {
     transform: rotate(-90deg);
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+    animation: "fade-in" 500ms;
 }

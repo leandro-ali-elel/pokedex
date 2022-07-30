@@ -2,41 +2,13 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Apollo, gql} from 'apollo-angular';
 import {Observable} from 'rxjs';
-import {map, pluck, shareReplay, switchMap} from 'rxjs/operators';
+import {map, pluck, shareReplay, switchMap, tap} from 'rxjs/operators';
 import {environment} from 'src/environments/environment';
-import {GET_ALL_POKEMONS} from '../graphql/queries/pokemon';
+import {GET_ALL_POKEMONS, GET_ALL_POKEMONS_FROM_IDS} from '../graphql/queries/pokemon';
 import {GET_POKEMON_EVOLUTION_CHAIN} from '../graphql/queries/pokemon-evolution-chain';
 import {Pokemons} from '../models/interfaces/pokemon';
 import {PokemonEvolutionChain} from '../models/interfaces/pokemon-evolution-chain';
 import {Trainer} from '../models/interfaces/trainer';
-
-export const POKEMONS = gql`
-  query Pokemons($ids: [Int!]) {
-    pokemon_v2_pokemon(where: {id: {_in: $ids}}) {
-      id
-      name
-      pokemon_v2_pokemonstats(where: {stat_id: {_in: [1, 2, 3, 6]}}) {
-        pokemon_v2_stat {
-          name
-        }
-        base_stat
-      }
-      pokemon_v2_pokemonsprites {
-        sprites
-      }
-      pokemon_v2_pokemontypes {
-        pokemon_v2_type {
-          id
-          name
-          pokemon_v2_typeefficacies {
-            damage_factor
-            id
-          }
-        }
-      }
-    }
-  }
-`;
 
 @Injectable({
   providedIn: 'root',
@@ -55,6 +27,7 @@ export class PokemonService {
     if (!this.allPokemons$) {
       const searchId = Number.isNaN(+search) ? 0 : +search;
       return this.apollo
+        .use('pokemon')
         .query({
           query: GET_ALL_POKEMONS,
           variables: {
@@ -65,7 +38,7 @@ export class PokemonService {
             searchId,
           },
         })
-        .pipe(shareReplay(1), pluck('data')) as Observable<Pokemons>;
+        .pipe(pluck('data')) as Observable<Pokemons>;
     }
     return this.allPokemons$;
   }
@@ -93,6 +66,7 @@ export class PokemonService {
     evolutionId: number
   ): Observable<PokemonEvolutionChain> {
     return this.apollo
+      .use('pokemon')
       .query({query: GET_POKEMON_EVOLUTION_CHAIN, variables: {evolutionId}})
       .pipe(pluck('data')) as Observable<PokemonEvolutionChain>;
   }
@@ -113,7 +87,8 @@ export class PokemonService {
 
   private getPokemonsFromCollectionId(ids: number[]): Observable<Pokemons> {
     return this.apollo
-      .query({query: POKEMONS, variables: {ids}})
+      .use('pokemon')
+      .query({query: GET_ALL_POKEMONS_FROM_IDS, variables: {ids}})
       .pipe(pluck('data')) as Observable<Pokemons>;
   }
 }

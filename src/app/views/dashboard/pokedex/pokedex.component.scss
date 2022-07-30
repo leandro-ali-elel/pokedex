@@ -45,17 +45,19 @@
 
         .sprite {
             img {
-                width: 96px;
-                height: 96px;
+                width: 86px;
+                height: 86px;
                 margin: auto;
             }
         }
 
         .name {
             text-transform: capitalize;
+            font-size: 1.4rem;
         }
 
         .id {
+            display: none;
             text-align: end;
             padding-right: 20px;
         }
@@ -83,6 +85,7 @@
             .name {
             }
             .id {
+                display: table-cell;
             }
             .sprite {
                 img {
@@ -91,6 +94,9 @@
                 }
             }
         }
+    }
+    .results {
+        margin-top: 30px;
     }
     .filters {
         text-align: center;

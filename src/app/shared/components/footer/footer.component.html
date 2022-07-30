@@ -1,1 +1,11 @@
-<p>footer works!</p>
+<footer>
+    <p>Hello, this is a footer. <br>
+        I didn't know what to put here, so I used an API to request dad jokes randomly and try multi-api graphql
+        configurations: <br>
+    </p>
+    <ng-container *ngIf="(joke$ | async ) as joke">
+        <!-- :P -->
+        <p><i>{{joke.joke.joke}}</i></p>
+        <!-- :P -->
+    </ng-container>
+</footer>

@@ -43,17 +43,21 @@
                     </tr>
                 </tbody>
             </table>
-
             <ng-container *ngIf="{offset: offset$ | async} as pagination">
 
                 <div class="pagination">
                     <button [disabled]="pagination.offset === 0" (click)="handleChangePage(-1)" class="btn btn-primary">
-                        <span class="left-arrow">▲</span>
+                        <span>◄</span>
                     </button>
-                    <button [disabled]="pagination.offset === 15" (click)="handleChangePage(1)" class="btn btn-primary">
-                        <span class="right-arrow">▲</span>
+                    <button
+                        [disabled]="((pagination.offset ?? 0)  + 10) >= (pokemons.pokemon_v2_pokemon_aggregate.aggregate.count)"
+                        (click)="handleChangePage(1)" class="btn btn-primary">
+                        <span>►</span>
                     </button>
                 </div>
+                <p class="results" *ngIf="pokemons.pokemon_v2_pokemon_aggregate.aggregate.count > 0">
+                    {{pokemons.pokemon_v2_pokemon_aggregate.aggregate.count}}
+                    results.</p>
             </ng-container>
 
         </ng-container>

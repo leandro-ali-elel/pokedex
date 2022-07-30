@@ -1,0 +1,8 @@
+@import "/src/assets/sass/main.scss";
+
+footer {
+    text-align: center;
+    padding: 20px;
+    @include pokemon-border;
+    margin-top: 40px;
+}

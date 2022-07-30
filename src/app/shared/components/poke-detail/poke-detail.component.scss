@@ -2,7 +2,9 @@
 
 .wrapper {
     text-align: center;
-
+    h1 {
+        padding-top: 30px;
+    }
     .content {
         overflow: auto;
         max-width: 100%;
@@ -23,8 +25,8 @@
                         text-transform: capitalize;
                     }
                     img {
-                        width: 98px;
-                        height: 98px;
+                        width: 64px;
+                        height: 64px;
                         margin: auto;
                         @include main-transition;
 
@@ -54,6 +56,10 @@
                 .species-column {
                     flex-direction: column;
                     .species {
+                        img {
+                            width: 98px;
+                            height: 98px;
+                        }
                     }
                 }
             }

@@ -10,11 +10,11 @@ import {GraphQLModule} from './graphql.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    GraphQLModule,
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    GraphQLModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

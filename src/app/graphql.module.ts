@@ -1,23 +1,26 @@
 import {NgModule} from '@angular/core';
-import {ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
-import {ApolloClientOptions, InMemoryCache} from '@apollo/client/core';
+import {InMemoryCache} from '@apollo/client/core';
+import {ApolloModule, APOLLO_NAMED_OPTIONS, NamedOptions} from 'apollo-angular';
 import {HttpLink} from 'apollo-angular/http';
 import {environment} from 'src/environments/environment';
-
-const uri = environment.pokeAPIURL;
-export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
-  return {
-    link: httpLink.create({uri}),
-    cache: new InMemoryCache(),
-  };
-}
 
 @NgModule({
   exports: [ApolloModule],
   providers: [
     {
-      provide: APOLLO_OPTIONS,
-      useFactory: createApollo,
+      provide: APOLLO_NAMED_OPTIONS,
+      useFactory(httpLink: HttpLink): NamedOptions {
+        return {
+          pokemon: {
+            link: httpLink.create({uri: environment.pokeAPIURL}),
+            cache: new InMemoryCache(),
+          },
+          jokes: {
+            link: httpLink.create({uri: environment.dadJokesAPI}),
+            cache: new InMemoryCache({resultCaching: false}),
+          },
+        };
+      },
       deps: [HttpLink],
     },
   ],

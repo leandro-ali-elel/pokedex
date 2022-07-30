@@ -23,6 +23,10 @@ const routes: Routes = [
         path: 'fight',
         loadChildren: () => import('./fight/fight.module').then(m => m.FightModule),
       },
+      {
+        path: '**',
+        redirectTo: 'pokedex',
+      },
     ],
   },
 ];

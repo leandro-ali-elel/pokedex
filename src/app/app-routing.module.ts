@@ -9,12 +9,14 @@ export const routes: Routes = [
     path: 'entry',
     loadChildren: () => import('./views/entry/entry.module').then(m => m.EntryModule),
     canActivate: [LoginGuard],
+    title: 'Poke-Login'
   },
   {
     path: 'dashboard',
     loadChildren: () =>
       import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [SessionGuard],
+    title: 'Poke-Dashboard'
   },
   {
     path: '**',

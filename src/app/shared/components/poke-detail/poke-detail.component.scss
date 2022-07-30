@@ -2,12 +2,15 @@
 
 .wrapper {
     text-align: center;
+    height: 100%;
     h1 {
         padding-top: 30px;
     }
     .content {
-        overflow: auto;
         max-width: 100%;
+        height: 100%;
+        overflow: auto;
+
         .species-container {
             display: flex;
             flex-direction: column;

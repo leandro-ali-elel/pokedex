@@ -4,5 +4,9 @@ footer {
     text-align: center;
     padding: 20px;
     @include pokemon-border;
-    margin-top: 40px;
+    margin: 40px 30px;
+
+    @include tablet() {
+        margin: 40px 10px 10px 10px;
+    }
 }

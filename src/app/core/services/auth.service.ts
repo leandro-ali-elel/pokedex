@@ -8,7 +8,7 @@ import {authApiActions} from '../store/actions/user.actions';
 export class AuthService {
   constructor(private store: Store) {}
   public logout(): void {
-    this.store.dispatch(authApiActions.logout());
+    this.store.dispatch(authApiActions.logout({}));
     localStorage.removeItem('username');
   }
 

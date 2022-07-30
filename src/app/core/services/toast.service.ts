@@ -1,9 +1,9 @@
 import {Overlay, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
 import {Injectable, Injector, StaticProvider} from '@angular/core';
-import {NEVER, race, Subject} from 'rxjs';
+import {race, Subject} from 'rxjs';
 import {take, tap} from 'rxjs/operators';
-import {ToastComponent} from 'src/app/shared/toast/toast.component';
+import {ToastComponent} from 'src/app/shared/components/toast/toast.component';
 
 @Injectable({
   providedIn: 'root',

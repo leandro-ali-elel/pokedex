@@ -39,6 +39,28 @@ export const GET_ALL_POKEMONS = gql`
   }
 `;
 
+export const GET_ALL_POKEMONS_COUNT = gql`
+  query PokemonsCount {
+    pokemon_v2_pokemon_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+export const GET_RANDOM_POKEMON = gql`
+  query Pokemon($id: Int!) {
+    pokemon_v2_pokemon(where: {id: {_eq: $id}}) {
+      id
+      name
+      weight
+      height
+      pokemon_v2_pokemonsprites {
+        sprites
+      }
+    }
+  }
+`;
 export const GET_ALL_POKEMONS_FROM_IDS = gql`
   query Pokemons($ids: [Int!]) {
     pokemon_v2_pokemon(where: {id: {_in: $ids}}) {

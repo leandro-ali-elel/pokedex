@@ -1,0 +1,42 @@
+<div class="wrapper">
+    <div class="pokemon" [ngClass]="{'pokemon--shiny': pokemon.isShiny}"
+        *ngIf="(pokemon$ | async) as pokemon; else loadingPokemon">
+
+        <img width="96" height="96"
+            [src]="(pokemon.pokemon_v2_pokemonsprites[0].sprites | extractPokemonImage: pokemon.isShiny:pokemon.isMale )"
+            alt="">
+        <h1 class="name">
+            {{pokemon.name}}
+        </h1>
+        <p> {{pokemon.isMale ? '♂ Male':'♀ Female'}}
+        </p>
+        <p>
+            No. {{pokemon.id}}
+        </p>
+        <p>
+            <ng-container *ngIf="pokemon.calculatedHeight; else noHeight">
+                {{pokemon.calculatedHeight}} ft.
+            </ng-container>
+            <ng-template #noHeight>
+                unknown height
+            </ng-template>
+        </p>
+        <p>
+            <ng-container *ngIf="pokemon.calculatedWeight; else noWeight">
+                {{pokemon.calculatedWeight}} lbs.
+            </ng-container>
+            <ng-template #noWeight>
+                unknown weight
+            </ng-template>
+        </p>
+    </div>
+    <button (click)="handleGenerateAgain()" class="btn btn-primary">Generate Again</button>
+    <div class="overlay-loading" *ngIf="loading">
+        <p>Loading new data...</p>
+    </div>
+</div>
+
+
+<ng-template #loadingPokemon>
+    Loading pokemon...
+</ng-template>

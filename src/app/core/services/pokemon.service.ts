@@ -1,13 +1,20 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Apollo, gql} from 'apollo-angular';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {map, pluck, shareReplay, switchMap, tap} from 'rxjs/operators';
+import {generateRandomPokemon} from 'src/app/utils/pokemon-utils';
 import {environment} from 'src/environments/environment';
-import {GET_ALL_POKEMONS, GET_ALL_POKEMONS_FROM_IDS} from '../graphql/queries/pokemon';
+import {
+  GET_ALL_POKEMONS,
+  GET_ALL_POKEMONS_COUNT,
+  GET_ALL_POKEMONS_FROM_IDS,
+  GET_RANDOM_POKEMON,
+} from '../graphql/queries/pokemon';
 import {GET_POKEMON_EVOLUTION_CHAIN} from '../graphql/queries/pokemon-evolution-chain';
-import {Pokemons} from '../models/interfaces/pokemon';
+import {Pokemon, PokemonAggregation, Pokemons} from '../models/interfaces/pokemon';
 import {PokemonEvolutionChain} from '../models/interfaces/pokemon-evolution-chain';
+import {RandomPokemon} from '../models/interfaces/random-pokemon';
 import {Trainer} from '../models/interfaces/trainer';
 
 @Injectable({
@@ -17,6 +24,24 @@ export class PokemonService {
   private allPokemons$?: Observable<Pokemons>;
 
   constructor(private httpClient: HttpClient, private apollo: Apollo) {}
+
+  public generateRandomPokemon(): Observable<RandomPokemon> {
+    // return this.apollo
+    // .use('pokemon')
+    // .query<PokemonAggregation>({query: GET_ALL_POKEMONS_COUNT})
+    // .pipe(
+    // map(res => res.data.pokemon_v2_pokemon_aggregate.aggregate.count),
+    const count = 500; // PokeAPI has a bug with generations
+    const randomPokemonId = Math.floor(Math.random() * count);
+    return this.apollo
+      .use('pokemon')
+      .query({query: GET_RANDOM_POKEMON, variables: {id: randomPokemonId}})
+      .pipe(
+        map(res =>
+          generateRandomPokemon((res.data as any).pokemon_v2_pokemon[0] as Pokemon)
+        )
+      ) as Observable<RandomPokemon>;
+  }
 
   public getAllPokemons(
     order_by: Object,

@@ -1,0 +1,28 @@
+@import "src/assets/sass/abstract/mixins";
+@import "src/assets/sass/abstract/variables";
+
+.wrapper {
+    @include container-limit;
+    .pokemon {
+        @include pokemon-border;
+        padding: 20px;
+        margin: auto;
+        margin-bottom: 20px;
+        width: 280px;
+        .name {
+            text-transform: capitalize;
+        }
+
+        img {
+            width: 256px;
+            height: 256px;
+            filter: grayscale(0.5);
+        }
+        &--shiny {
+            background-color: $color-shiny;
+        }
+    }
+    button {
+        margin: auto;
+    }
+}

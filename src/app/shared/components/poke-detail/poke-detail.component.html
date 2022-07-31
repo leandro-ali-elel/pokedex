@@ -1,6 +1,6 @@
+<h1>Evolution Chain</h1>
+<h2>Touch the pokemon to hear his cry</h2>
 <div class="wrapper">
-    <h1>Evolution Chain</h1>
-    <h2>Touch the pokemon to hear his cry</h2>
     <div class="content">
         <ng-container *ngIf="(pokemon$ | async) as chain; else loading">
             <ng-container *ngFor="let evolutionChain of chain.pokemon_v2_evolutionchain">

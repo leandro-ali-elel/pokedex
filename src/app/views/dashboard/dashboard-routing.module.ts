@@ -10,28 +10,34 @@ const routes: Routes = [
       {
         path: 'my-team',
         loadChildren: () => import('./my-team/my-team.module').then(m => m.MyTeamModule),
-        title: 'My Dreamteam'
+        title: 'My Dreamteam',
       },
       {
         path: 'my-box',
         loadChildren: () => import('./my-box/my-box.module').then(m => m.MyBoxModule),
-        title: 'My Box'
+        title: 'My Box',
       },
       {
         path: 'pokedex',
         loadChildren: () => import('./pokedex/pokedex.module').then(m => m.PokedexModule),
-        title: 'Pokedex'
+        title: 'Pokedex',
       },
       {
         path: 'fight',
         loadChildren: () => import('./fight/fight.module').then(m => m.FightModule),
-        title: 'Poke Fight'
-
+        title: 'Poke Fight',
+      },
+      {
+        path: 'random-pokemon',
+        loadChildren: () =>
+          import('./random-pokemon/random-pokemon.module').then(
+            m => m.RandomPokemonModule
+          ),
+        title: 'Random Pokemon',
       },
       {
         path: '**',
         redirectTo: 'pokedex',
-        
       },
     ],
   },

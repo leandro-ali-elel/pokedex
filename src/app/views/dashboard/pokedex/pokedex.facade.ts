@@ -34,7 +34,7 @@ export class PokedexFacade {
 
   public showPokemonDetails(pokemon: Pokemon): void {
     this.modalService.open(PokeDetailComponent, {
-      evolutionId: pokemon.pokemon_v2_pokemonspecy.evolution_chain_id,
+      evolutionId: pokemon.pokemon_v2_pokemonspecy?.evolution_chain_id,
       closeOptions: {
         backdrop: true,
         escape: true,

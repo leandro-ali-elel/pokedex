@@ -1,6 +1,8 @@
 export interface Pokemon {
   id: number;
   name: string;
+  weight?: number;
+  height?: number;
   pokemon_v2_pokemonspecy: {
     evolution_chain_id: number;
   };
@@ -21,7 +23,12 @@ export interface Pokemon {
   }[];
 }
 
-export interface Pokemons {
+export interface Pokemons extends PokemonAggregation {
   pokemon_v2_pokemon: Pokemon[];
-  pokemon_v2_pokemon_aggregate: {aggregate: {count: number}};
+}
+
+export interface PokemonAggregation {
+  pokemon_v2_pokemon_aggregate: {
+    aggregate: {count: number};
+  };
 }

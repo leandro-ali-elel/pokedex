@@ -1,11 +1,17 @@
 <main>
-    <ng-container *ngIf="(myPokemon$ | async) as myPokemon">
+    <!-- <ng-container *ngIf="(myPokemon$ | async) as myPokemon">
         {{myPokemon.name}}
     </ng-container>
     VS
     <ng-container *ngIf="(enemyPokemon$ | async) as enemyPokemon">
         {{enemyPokemon.name}}
-    </ng-container>
+    </ng-container> -->
+
+    <!-- <ng-container *ngIf="(stateMachine$ | async) as stateMachine"> -->
+    <!-- <ng-container *ngIf="stateMachine.turn === 'player'"> -->
+    <!-- </ng-container> -->
+    <!-- </ng-container>
+        <button (click)="attack()">Attack!</button> -->
     <p>
         Oops... this section is still under construction. <br>
         Currently I have a tight schedule but...<br>
@@ -13,6 +19,7 @@
     </p>
     <p>Disclaimer: Bold font affirmations may not be true.</p>
 
+    <button (click)="startBattle()">Start battle!</button>
     <audio controls>
         <source src="assets/music/gold-trainer-music.ogg">
     </audio>

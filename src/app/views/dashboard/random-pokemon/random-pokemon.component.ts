@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {switchMap, tap} from 'rxjs/operators';
 import {RandomPokemon} from 'src/app/core/models/interfaces/random-pokemon';
@@ -22,7 +17,6 @@ export class RandomPokemonComponent implements OnInit {
   private pokemonTrigger$ = new BehaviorSubject<null>(null);
 
   constructor(
-    private cdr: ChangeDetectorRef,
     private dialogService: DialogService,
     private pokemonService: PokemonService
   ) {}

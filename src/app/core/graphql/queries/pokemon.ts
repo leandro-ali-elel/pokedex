@@ -88,3 +88,20 @@ export const GET_ALL_POKEMONS_FROM_IDS = gql`
     }
   }
 `;
+
+export const GET_FIGHTER_POKEMON = gql`
+query GetFighterPokemon($id: Int!) {
+  pokemon_v2_pokemon(where: {id: {_eq: $id}}) {
+    name,
+    pokemon_v2_pokemonstats {
+      pokemon_v2_stat {
+        name
+      }
+      base_stat
+    }
+    pokemon_v2_pokemonsprites {
+      sprites
+    }
+  }
+}
+`

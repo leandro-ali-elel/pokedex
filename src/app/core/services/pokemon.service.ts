@@ -9,11 +9,13 @@ import {
   GET_ALL_POKEMONS,
   GET_ALL_POKEMONS_COUNT,
   GET_ALL_POKEMONS_FROM_IDS,
+  GET_FIGHTER_POKEMON,
   GET_RANDOM_POKEMON,
 } from '../graphql/queries/pokemon';
 import {GET_POKEMON_EVOLUTION_CHAIN} from '../graphql/queries/pokemon-evolution-chain';
 import {Pokemon, PokemonAggregation, Pokemons} from '../models/interfaces/pokemon';
 import {PokemonEvolutionChain} from '../models/interfaces/pokemon-evolution-chain';
+import {PokemonFighter} from '../models/interfaces/pokemon-fighter';
 import {RandomPokemon} from '../models/interfaces/random-pokemon';
 import {Trainer} from '../models/interfaces/trainer';
 
@@ -21,8 +23,6 @@ import {Trainer} from '../models/interfaces/trainer';
   providedIn: 'root',
 })
 export class PokemonService {
-  private allPokemons$?: Observable<Pokemons>;
-
   constructor(private httpClient: HttpClient, private apollo: Apollo) {}
 
   public generateRandomPokemon(): Observable<RandomPokemon> {
@@ -48,24 +48,28 @@ export class PokemonService {
     search: string,
     offset: number,
     limit: number
-  ): Observable<Pokemons> {
-    if (!this.allPokemons$) {
-      const searchId = Number.isNaN(+search) ? 0 : +search;
-      return this.apollo
-        .use('pokemon')
-        .query({
-          query: GET_ALL_POKEMONS,
-          variables: {
-            order_by,
-            search,
-            offset,
-            limit,
-            searchId,
-          },
-        })
-        .pipe(pluck('data')) as Observable<Pokemons>;
-    }
-    return this.allPokemons$;
+  ): Observable<Pokemons & PokemonAggregation> {
+    const searchId = Number.isNaN(+search) ? 0 : +search;
+    return this.apollo
+      .use('pokemon')
+      .query({
+        query: GET_ALL_POKEMONS,
+        variables: {
+          order_by,
+          search,
+          offset,
+          limit,
+          searchId,
+        },
+      })
+      .pipe(pluck('data')) as Observable<Pokemons & PokemonAggregation>;
+  }
+
+  public getFighterPokemon(id: number): Observable<Pokemon> {
+    return this.apollo
+      .use('pokemon')
+      .query<Pokemons>({query: GET_FIGHTER_POKEMON, variables: {id}})
+      .pipe(map(res => res.data.pokemon_v2_pokemon[0])) as Observable<Pokemon>;
   }
 
   public findTrainer(username: string): Observable<Trainer> {

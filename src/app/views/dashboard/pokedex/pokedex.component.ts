@@ -10,7 +10,11 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import {Pokemon, Pokemons} from 'src/app/core/models/interfaces/pokemon';
+import {
+  Pokemon,
+  PokemonAggregation,
+  Pokemons,
+} from 'src/app/core/models/interfaces/pokemon';
 import {normalize} from 'src/app/utils/strings';
 import {PokedexFacade} from './pokedex.facade';
 
@@ -26,7 +30,7 @@ export class PokedexComponent implements OnInit {
   protected isLoading = true;
   protected limit$ = new BehaviorSubject<number>(10);
   protected offset$ = new BehaviorSubject<number>(0);
-  protected pokemons$!: Observable<Pokemons>;
+  protected pokemons$!: Observable<Pokemons & PokemonAggregation>;
   protected searchControl = new FormControl('');
   protected sortBy$ = new BehaviorSubject<PokedexSortBy>('id');
   protected sortByOrder$ = new BehaviorSubject<PokedexSortByOrder>('asc');

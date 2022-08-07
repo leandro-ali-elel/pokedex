@@ -23,7 +23,7 @@ export interface Pokemon {
   }[];
 }
 
-export interface Pokemons extends PokemonAggregation {
+export interface Pokemons {
   pokemon_v2_pokemon: Pokemon[];
 }
 

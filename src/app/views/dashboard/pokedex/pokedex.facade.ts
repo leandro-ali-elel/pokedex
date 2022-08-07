@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Pokemon, Pokemons} from 'src/app/core/models/interfaces/pokemon';
+import {Pokemon, PokemonAggregation, Pokemons} from 'src/app/core/models/interfaces/pokemon';
 import {ModalService} from 'src/app/core/services/modal.service';
 import {PokemonService} from 'src/app/core/services/pokemon.service';
 import {TutorialService} from 'src/app/core/services/tutorial.service';
@@ -21,7 +21,7 @@ export class PokedexFacade {
     sortBy: PokedexSortBy,
     sortByOrder: PokedexSortByOrder,
     searchName: string | null
-  ): Observable<Pokemons> {
+  ): Observable<Pokemons & PokemonAggregation> {
     return this.pokemonService.getAllPokemons(
       {[sortBy]: sortByOrder},
       searchName ?? '',

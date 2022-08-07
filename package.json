@@ -6,6 +6,7 @@
     "start": "node server.js",
     "build": "ng build",
     "build:stats": "ng build --stats-json",
+    "webpack-analyzer": "webpack-bundle-analyzer dist/pokedex/stats.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",

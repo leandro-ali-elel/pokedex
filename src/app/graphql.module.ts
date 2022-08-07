@@ -9,15 +9,16 @@ import {environment} from 'src/environments/environment';
   providers: [
     {
       provide: APOLLO_NAMED_OPTIONS,
+
       useFactory(httpLink: HttpLink): NamedOptions {
         return {
           pokemon: {
             link: httpLink.create({uri: environment.pokeAPIURL}),
-            cache: new InMemoryCache(),
+            cache: new InMemoryCache({addTypename: false}),
           },
           jokes: {
             link: httpLink.create({uri: environment.dadJokesAPI}),
-            cache: new InMemoryCache({resultCaching: false}),
+            cache: new InMemoryCache({resultCaching: false, addTypename: false}),
           },
         };
       },

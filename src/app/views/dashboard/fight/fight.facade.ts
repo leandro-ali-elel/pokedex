@@ -20,8 +20,7 @@ export class FightFacade {
   public getMyPokemonFighterStats = (): Observable<Pokemon> => {
     return this.store.select(selectLogin).pipe(
       filter(res => !!res),
-      switchMap(res => this.pokemonService.getFighterPokemon(res!.team[0])),
-      // map(res => res)
+      switchMap(res => this.pokemonService.getFighterPokemon(res!.team[0]))
     );
   };
 }
